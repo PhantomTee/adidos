@@ -1,0 +1,1119 @@
+*{
+    background: white;
+    margin:0;
+    padding:0;
+}
+.head{
+    border: 1px;
+    height: 20px;
+    width: 100vw;
+    background: black;
+    text-align: center;
+    padding-top: 5px;
+}
+.head a{
+    color: white;
+    font-size:medium;
+    font-weight: bolder;
+}
+.head1{
+    border: 1px;
+    height: 78px;
+    width: 100vw;
+    background: none; 
+}
+.cover{
+    height: 120px;
+    width: 100%;
+    border: 1px;
+}
+.subhead{
+    height: 20px;
+    width: 100vw;
+    border: 1px;
+    background: none;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 15px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: gray;
+    font-weight: 100;
+
+}
+.one{
+    height: auto;
+    width:auto;
+    margin: 2px;
+}
+.oned{
+    height: auto;
+    width:auto;
+    margin-left: 10px;
+
+}
+.onec{
+    height: auto;
+    width:auto;
+    margin-left: 10px;
+}
+.oneq{
+    height: auto;
+    width:auto;
+    margin-left: 10px;
+}
+.im{
+    border: 1px;
+    width: 70px;
+    height: 60px;
+    margin:3px;
+}
+.smallhead{
+    height: 67px;
+    width: 100vw;
+    border: 1px;
+    background:none;
+    display: flex;
+    
+}
+.top{
+    border: 1px solid gray;
+    height: 500px;
+    width: 100vw;
+    display: flex;
+    background: rgba(185, 180, 180, 0.301);
+
+}
+.side{
+    height: 100%;
+    width: 37%;
+    border: 1px ;
+    background: none;
+    padding-top: 70px;
+}
+.side1{
+    height: 100%;
+    width: 60%;
+    border: 1px solid orange;
+    margin-left: 10px;
+    background: none;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 80px 200px 140px 80px;
+    
+
+}
+.item1{
+    border: 1px solid orange;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+    margin-top: 10px;
+    font-weight: bolder;
+    font-family:Arial, Helvetica, sans-serif;
+    color: orange;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 15px;
+    opacity: 0.7;
+
+    
+
+}
+.item2{
+    border: 1px solid orange;
+    background-image: url(IMAGES/did.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    opacity: 1;
+    
+
+}
+.item3{
+    border: 1px solid orange;
+    background-image: url(IMAGES/dil.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    
+
+}
+.item4{
+    border: 1px solid orange;
+    background-image: url(IMAGES/picture.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+
+}
+.item5{
+    border: 1px solid orange;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    opacity: 0.8;
+    display: flex;
+    align-content: space-between;
+    
+
+}
+.pic1{
+    margin-left: 430px;
+}
+
+button{
+    height: 40px;
+    width: 150px;
+    background:black;
+    color: white;
+    margin-left: 20px;
+    margin-top: 10px;
+    box-shadow: 3px 3px white, 4px 4px black, -4px -4px white, -5px -5px black;
+}
+.popular{
+    height: 100px;
+    border: 1px ;
+    width: 100vw;
+    background: none;
+    display: flex;
+}
+.box1{
+    border: 1px solid grey;
+    height: 30px;
+    width: auto;
+    background:none;
+    margin-left: 250px;
+    margin-top: 40px;
+    text-justify: auto;
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-left: 10px;
+}
+.box2{
+    border: 1px solid gray;
+    height: 30px;
+    width: auto;
+    background:none;
+    margin-left: 30px;
+    margin-top: 40px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-left: 10px;
+    
+}
+.box3{
+    border: 1px solid grey;
+    height: 30px;
+    width: auto;
+    background:none;
+    margin-left: 30px;
+    margin-top: 40px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-left: 10px;
+}
+.box4{
+    border: 1px solid grey;
+    height: 30px;
+    width: auto;
+    background:none;
+    margin-left: 30px;
+    margin-top: 40px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-left: 10px;
+}
+.box5{
+    border: 1px solid grey;
+    height: 30px;
+    width: auto;
+    background:none;
+    margin-left: 30px;
+    margin-top: 40px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-right: 12px;
+    padding-left: 10px;
+}
+.popular .box1:hover{
+    border: 1.5px solid black;
+    height: 30px;
+    width: auto;
+    
+}
+.popular .box2:hover{
+    border: 1.5px solid black;
+    height: 30px;
+    width: auto;
+    
+}
+.popular .box3:hover{
+    border: 1.5px solid black;
+    height: 30px;
+    width: auto;
+    
+}
+.popular .box4:hover{
+    border: 1.5px solid black;
+    height: 30px;
+    width: auto;
+    
+}
+.popular .box5:hover{
+    border: 1.5px solid black;
+    height: 30px;
+    width: auto;
+    
+}
+a{
+    text-decoration: none;
+    background: none;
+}
+.shop{
+    border: 1px;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    display:flex;
+}
+.shoe{
+    border: 1px solid black;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 100px;
+    background-image: url(IMAGES/shoe.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 20%;
+    
+}
+.shoe a{
+    transform: translate(-70%,-40%);
+    top: 85%;
+    left: 20%;
+    position: absolute;
+    text-decoration: underline;
+    color:black;
+    font-weight: bold;
+}
+.clothing{
+    border: 1px solid black;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 20px;
+    background-image: url(IMAGES/tyil.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 20%;
+    
+}
+.best-sellers{
+    border: 1px solid black;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 20px;
+    background-image: url(IMAGES/socks.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 20%;
+    
+    
+}
+.new-arrival{
+    border: 1px solid black;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 20px;
+    background-image: url(IMAGES/bra.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 20%;
+    
+}
+.clothing a{
+    transform: translate(-70%,-40%);
+    top: 85%;
+    left: 45%;
+    position: absolute;
+    text-decoration: underline;
+    color:black;
+    font-weight: bold;
+}
+.best-sellers a{
+    transform: translate(-70%,-40%);
+    top: 85%;
+    left: 68%;
+    position: absolute;
+    text-decoration: underline;
+    color:black;
+    font-weight: bold;
+}
+.new-arrival a{
+    transform: translate(-70%,-40%);
+    top: 85%;
+    left: 88%;
+    position: absolute;
+    text-decoration: underline;
+    color:black;
+    font-weight: bold;
+}
+button a:hover{
+    text-decoration: none;
+    color: gray;
+}
+button a{
+    text-decoration: none;
+    color: white;
+}
+.section1{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: none;
+    border-left: none;
+    width: 100%;
+    height: 80px;
+    display: flex;
+}
+.subsection{
+    border: 1px;
+    width: 120px;
+    text-align:center;
+    height: 15px;
+    margin-left: 3px;
+    margin-top: 40px;
+    padding-top: 15px;
+    overflow: hidden;
+    float: left;
+}
+.subsect{
+    border: 1px;
+    width: 150px;
+    text-align:center;
+    height: 15px;
+    margin-left: 3px;
+    margin-top: 40px;
+    padding-top: 15px;
+}
+.subsection:hover{
+    border-bottom: 3px solid black;
+    width: 120px;
+}
+.subsect:hover{
+    border-bottom: 3px solid black;
+    width: 150px;
+}
+.subsection:hover + .hide{
+    border: 1px solid black;
+    display: block;
+}
+.hide{
+   
+    height: 100px;
+    width: 400px;
+    border: 1px solid black;
+    list-style-type: none;
+    display:none;
+    position:absolute;
+    
+
+}
+.hide ul li a{
+    float:none;
+    color: red;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    padding: 12px 16px;
+}
+.subsection:hover .hide{
+    display: block;
+}
+
+.hid{
+    display: flex;
+    align-content: space-between;
+}
+.hid1{
+    display: flex;
+}
+.hidden11{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden6{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden7{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden8{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden9{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden0{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden12{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden13{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hidden14{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hidden15{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hidden16{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hidden11:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+.hidden6:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden7:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden8:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden9:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+ul{
+    list-style-type: none;
+}
+
+.hidden0:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden12:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden13:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden14:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.hidden15:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+.hidden16:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+
+}
+.subsection:hover{
+    border-bottom: 3px solid black;
+    width: 120px;
+}
+.subsect:hover{
+    border-bottom: 3px solid black;
+    width: 150px;
+}
+.subsect:hover + .shide{
+    border: 1px solid black;
+    display: block;
+}
+.shide{
+   
+    height: 100px;
+    width: 400px;
+    border: 1px solid black;
+    list-style-type: none;
+    display:none;
+    position:absolute;
+    
+
+}
+.shide ul li a{
+    float:none;
+    color: red;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    padding: 12px 16px;
+}
+.subsect:hover .shide{
+    display: block;
+}
+.men:hover .shide{
+    display: block;
+}
+.shid{
+    display: flex;
+    align-content: space-between;
+}
+.shid1{
+    display: flex;
+}
+.shidden11{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden6{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden7{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden8{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden9{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden0{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden12{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden13{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shidden14{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shidden15{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shidden16{
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    background:url(IMAGES/did.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.shidden11:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+.shidden6:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden7:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden8:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden9:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden0:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden12:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden13:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden14:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+
+.shidden15:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+}
+.shidden16:hover{
+    border: 4px solid black;
+    height: 10px;
+    width: 150px;
+    text-align: center;
+    padding-top: 138px;
+
+}
+.men{
+    border: 1px ;
+    height: 20px;
+    width: 60px;
+    margin-left: 15px;
+    margin-top: 40px;
+}
+
+
+
+.women{
+    border: 1px ;
+    height: 20px;
+    width: 60px;
+    margin-left: 5px;
+    margin-top: 40px;
+}
+
+.kids{
+    border: 1px ;
+    height: 20px;
+    width: 60px;
+    margin-left: 5px;
+    margin-top: 40px;
+}
+
+.sale{
+    border: 1px ;
+    height: 20px;
+    width: 60px;
+    margin-left: 5px;
+    margin-top: 40px;
+}
+
+.strip{
+    border: 1px ;
+    height: 20px;
+    width: 100px;
+    margin-left: 5px;
+    margin-top: 40px;
+}
+.menlist{
+    display:none;
+    position:absolute;
+    background: red;
+    min-width: 100px;
+    z-index: 1;
+}
+.men .menlist ul li a{
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display:block;
+    background:gray;
+}
+.men .menlist ul li a:hover{
+    color: black;
+    background: red;
+}
+.men:hover .menlist{
+    display:block;
+}
+.womenlist{
+    display:none;
+    position:absolute;
+    background: red;
+    min-width: 100px;
+    z-index: 1;
+}
+.women .womenlist ul li a{
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display:block;
+    background:gray;
+}
+.women .womenlist ul li a:hover{
+    color: black;
+    background: red;
+}
+.women:hover .womenlist{
+    display:block;
+}
+.kidslist{
+    display:none;
+    position:absolute;
+    background: red;
+    min-width: 100px;
+    z-index: 1;
+}
+.kids .kidslist ul li a{
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display:block;
+    background:gray;
+}
+.kids .kidslist ul li a:hover{
+    color: black;
+    background: red;
+}
+.kids:hover .kidslist{
+    display:block;
+}
+.salelist{
+    display:none;
+    position:absolute;
+    background: red;
+    min-width: 100px;
+    z-index: 1;
+}
+.sale .salelist ul li a{
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display:block;
+    background:gray;
+}
+.sale .salelist ul li a:hover{
+    color: black;
+    background: red;
+}
+.sale:hover .salelist{
+    display:block;
+}
+.striplist{
+    display:none;
+    position:absolute;
+    background: red;
+    min-width: 100px;
+    z-index: 1;
+}
+.strip .striplist ul li a{
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display:block;
+    background:gray;
+}
+.strip .striplist ul li a:hover{
+    color: black;
+    background: red;
+}
+.strip:hover .striplist{
+    display:block;
+}
+.cover input{
+    margin-left: 250px;
+    height: 30px;
+    margin-top: 30px;
+    border: 1px solid gray;
+    width: 150px;
+
+}
+.cover input:hover{
+    margin-left: 250px;
+    height: 30px;
+    margin-top: 30px;
+    border: 2px solid black;
+    width: 150px;
+}
+.left{
+    height:50px;
+    width: 200px;
+    border: 1px;
+    margin-top: 20px;
+    display: flex;
+    justify-content:space-around ;
+}
+.love{
+    height:30px;
+    width: 30px;
+    border: 1px ;
+    margin-top:10px;
+    background: url(IMAGES/fav.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.profile{
+    height:30px;
+    width: 30px;
+    border: 1px ;
+    margin-top:10px;
+    background: url(IMAGES/profile.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bag{
+    height:30px;
+    width: 30px;
+    border: 1px ;
+    margin-top:10px;
+    background: url(IMAGES/bag.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.picture{
+    width:100%;
+    height: 200px;
+    border: 1px solid black;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.pic11{
+    height: 170px;
+    margin-top: 13px;
+    width: 18%;
+    border:1px solid black;
+    background: url(IMAGES/bag.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    
+
+}
+.pic2{
+    height: 170px;
+    margin-top: 13px;
+    width: 18%;
+
+}
+.pic3{
+    height: 170px;
+    margin-top: 13px;
+    width: 18%;
+
+}
+.pic4{
+    height: 170px;
+    margin-top: 13px;
+    width: 18%;
+
+}
+.pic5{
+    height: 170px;
+    margin-top: 13px;
+    width: 18%;
+
+}
+.pic11:hover{
+    height: 200px;
+    margin-top: 13px;
+    width: 18%;
+    border: 2px solid black;
+    background-image: url(IMAGES/shoe.jpg);
+    background-size: cover;
+    display: block;
+    
+
+
+    
+    
+
+}
