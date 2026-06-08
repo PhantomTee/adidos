@@ -13,7 +13,6 @@ import {
   getPendingInvoicesForCustomer,
   getMerchantInvoices,
   markInvoicePaid,
-  rejectInvoice,
   assertInvoicePayable,
 } from '../services/invoices';
 import {
@@ -115,12 +114,6 @@ export async function routeMessage(
         return reply(T.merchantRegisteredMessage(merchant.business_name, merchant.merchant_alias, merchant.category, merchant.wallet_address));
       }
 
-      case 'GET_MERCHANT_PROFILE': {
-        const merchant = await getMerchantByUserId(user.id);
-        if (!merchant) return reply('You are not registered as a merchant. Send *register merchant* to get started.');
-        return reply(T.merchantProfileMessage(merchant.business_name, merchant.merchant_alias, merchant.category, merchant.wallet_address, merchant.location));
-      }
-
       case 'CREATE_INVOICE': {
         return handleCreateInvoice(user, intent.customerAlias, intent.amount, intent.memo);
       }
@@ -157,13 +150,11 @@ export async function routeMessage(
         const action = await getLatestPendingAction(user.id);
         if (!action) return reply('Nothing to cancel.');
         await cancelPendingAction(action.id);
-
-        // If there's an invoice, reject it
-        const payload = action.payload as Record<string, string>;
-        if (payload.invoiceId) {
-          await rejectInvoice(payload.invoiceId);
-        }
-        return reply('Cancelled.');
+        // Leave the invoice as 'pending' so the merchant can resend or the customer can re-initiate.
+        // Only reject if the customer explicitly rejects via NO on an invoice notification
+        // (handled separately in PAY_INVOICE context). Cancelling the approval step alone
+        // should not permanently close the invoice.
+        return reply('Cancelled. The invoice is still open if you want to pay later.');
       }
 
       case 'SALES_SUMMARY': {
@@ -183,8 +174,26 @@ export async function routeMessage(
         return reply(T.merchantsFoundMessage(merchants, query));
       }
 
-      default:
+      case 'GET_MERCHANT_PROFILE': {
+        const merchant = await getMerchantByUserId(user.id);
+        if (!merchant) return reply('You are not registered as a merchant. Send *register merchant* to get started.');
+        return reply(T.merchantProfileMessage(merchant.business_name, merchant.merchant_alias, merchant.category, merchant.wallet_address, merchant.location));
+      }
+
+      default: {
+        // "pending invoices" is a natural-language phrase that maps to GET_MERCHANT_PROFILE area
+        // but may not parse cleanly — handle it here as a fallback keyword match
+        const lower = text.toLowerCase();
+        if (lower.includes('pending invoice') || lower === 'pending') {
+          const merchant = await getMerchantByUserId(user.id);
+          if (!merchant) return reply('You are not registered as a merchant.');
+          const pendingInvs = await getMerchantInvoices(merchant.id, 'pending');
+          return reply(T.pendingInvoicesMessage(
+            pendingInvs.map(i => ({ amount_usdc: Number(i.amount_usdc), memo: i.memo, created_at: i.created_at, customer_alias: i.customer_alias }))
+          ));
+        }
         return reply(T.unknownMessage());
+      }
     }
   } catch (err) {
     const msg = extractErrorMessage(err);
@@ -316,11 +325,14 @@ async function handleConfirmPayment(
   // Check for duplicate by idempotency — if invoice already paid, don't re-execute
   if (payload.invoiceId) {
     const inv = await getInvoiceById(payload.invoiceId);
-    if (inv && inv.status === 'paid') {
+    if (!inv) {
+      return reply('Invoice not found. It may have been cancelled.');
+    }
+    if (inv.status === 'paid') {
       return reply(`This invoice was already paid. Tx: ${inv.tx_hash}`);
     }
     try {
-      await assertInvoicePayable(inv!);
+      await assertInvoicePayable(inv);
     } catch (err) {
       return reply(extractErrorMessage(err));
     }

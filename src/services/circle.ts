@@ -84,9 +84,9 @@ export async function checkCircleBalance(circleWalletId: string): Promise<Balanc
     const client = getCircleClient();
     const tokenId = process.env.CIRCLE_ARC_USDC_TOKEN_ID!;
 
-    // getWalletTokenBalance is the correct method name (singular)
+    // Circle SDK uses { id } not { walletId } for getWalletTokenBalance
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const resp = await (client as any).getWalletTokenBalance({ walletId: circleWalletId });
+    const resp = await (client as any).getWalletTokenBalance({ id: circleWalletId });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const balances: any[] = resp?.data?.tokenBalances ?? resp?.data ?? [];
 
