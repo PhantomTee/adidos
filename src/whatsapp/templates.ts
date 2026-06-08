@@ -190,7 +190,7 @@ export function paymentFailureMessage(reason: string): string {
 
 Reason: ${reason}
 
-The invoice is still unpaid. Please try again or contact support.`;
+The invoice is still unpaid. Send *PAY* to try again.`;
 }
 
 export function salesSummaryMessage(
@@ -226,7 +226,7 @@ export function transactionHistoryMessage(
   const lines = ['*Transaction History*', ''];
   txs.slice(0, 10).forEach((tx, i) => {
     const date = new Date(tx.created_at).toLocaleDateString();
-    lines.push(`${i + 1}. ${tx.amount_usdc.toFixed(2)} USDC — ${tx.memo ?? 'Payment'} — ${date}`);
+    lines.push(`${i + 1}. ${Number(tx.amount_usdc).toFixed(2)} USDC — ${tx.memo ?? 'Payment'} — ${date}`);
     lines.push(`   Tx: ${tx.tx_hash.slice(0, 16)}...`);
   });
   return lines.join('\n');

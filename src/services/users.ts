@@ -7,22 +7,15 @@ export async function getOrCreateUser(rawPhone: string): Promise<User> {
   const phone = normalizePhone(rawPhone);
   const db = getSupabase();
 
-  const { data: existing } = await db
-    .from('users')
-    .select('*')
-    .eq('phone', phone)
-    .single();
-
-  if (existing) return existing as User;
-
+  // Upsert is atomic — no race condition on concurrent first messages
   const { data, error } = await db
     .from('users')
-    .insert({ phone })
+    .upsert({ phone }, { onConflict: 'phone', ignoreDuplicates: false })
     .select('*')
     .single();
 
   if (error) throw new Error(`Failed to create user: ${error.message}`);
-  logger.info('New user created', { phone });
+  logger.debug('User fetched or created', { phone: phone.slice(-4) });
   return data as User;
 }
 

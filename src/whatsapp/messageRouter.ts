@@ -20,20 +20,18 @@ import {
   getLatestPendingAction,
   confirmPendingAction,
   cancelPendingAction,
-  cancelAllPendingForUser,
 } from '../services/pendingActions';
 import { recordTransaction } from '../services/transactions';
 import { checkDailyLimit } from '../services/limits';
-import { isCircleConfigured, sendCircleUsdc, checkCircleBalance } from '../services/circle';
+import { isCircleConfigured, sendCircleUsdc } from '../services/circle';
 import { isArcConfigured, sendArcUsdc } from '../services/arc';
 import { getUserTransactions } from '../services/transactions';
 import * as T from './templates';
-import { normalizeAlias, normalizePhone } from '../utils/validation';
+import { normalizeAlias, normalizePhone, isValidUsdcAmount } from '../utils/validation';
 import { extractErrorMessage } from '../utils/errors';
 import { periodLabel, periodStart } from '../utils/dates';
 import { logger } from '../utils/logger';
-import { OutboundMessage, User, Merchant, Invoice } from '../types';
-import { v4 as uuidv4 } from 'uuid';
+import { OutboundMessage, User, Merchant } from '../types';
 
 /** Process an inbound WhatsApp message and return the reply + any side-channel messages */
 export async function routeMessage(
@@ -74,7 +72,6 @@ export async function routeMessage(
       case 'CREATE_WALLET': {
         const result = await ensureWallet(user);
         if (!result.success) return reply(`Could not create wallet: ${result.error}`);
-        const updatedUser = { ...user, wallet_address: result.walletAddress ?? null };
         return reply(T.walletCreatedMessage(result.walletAddress!));
       }
 
@@ -214,6 +211,7 @@ async function handleCreateInvoice(
   if (!merchant) return reply('You are not registered as a merchant. Send *register merchant* first.');
   if (!customerAlias) return reply('Who is this invoice for? e.g. *invoice @thalhat 1 dollar for phone repair*');
   if (!amount) return reply('How much? e.g. *invoice @thalhat 1 dollar for phone repair*');
+  if (!isValidUsdcAmount(amount)) return reply(`Invalid amount: ${amount}. Must be between 0.000001 and 10,000 USDC.`);
 
   const customer = await resolveAlias(customerAlias);
   if (!customer) return reply(`Customer @${customerAlias} is not registered. They need to send *start* to ProxyPay first.`);
@@ -244,6 +242,10 @@ async function handleInitiatePayment(
 ): Promise<{ reply: string; extra: OutboundMessage[] }> {
   if (!user.wallet_address) {
     return reply(T.noWalletMessage());
+  }
+
+  if (!isValidUsdcAmount(amountUsdc)) {
+    return reply(`Invalid amount: ${amountUsdc}. Must be between 0.000001 and 10,000 USDC.`);
   }
 
   if (!isPaymentConfigured()) {

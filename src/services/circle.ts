@@ -188,6 +188,9 @@ async function pollCircleTxHash(
       if (state === 'CONFIRMED' || state === 'COMPLETE') {
         const txHash: string = tx.txHash ?? tx.transactionHash ?? '';
         if (txHash) return txHash;
+        // CONFIRMED but no txHash yet — keep polling (transient state)
+        logger.debug('Circle tx confirmed but txHash not yet populated', { txId });
+        continue;
       }
       if (state === 'FAILED' || state === 'CANCELLED' || state === 'DENIED') {
         logger.error('Circle tx failed', { txId, state, errorReason: tx.errorReason });
