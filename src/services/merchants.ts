@@ -107,6 +107,17 @@ export async function findMerchantsByCategory(category: string): Promise<Merchan
   return (data as Merchant[]) ?? [];
 }
 
+export async function findMerchantsByLocation(location: string): Promise<Merchant[]> {
+  const { data } = await getSupabase()
+    .from('merchants')
+    .select('*')
+    .ilike('location', `%${location}%`)
+    .eq('active', true)
+    .order('created_at', { ascending: false })
+    .limit(10);
+  return (data as Merchant[]) ?? [];
+}
+
 export async function getMerchantUser(merchant: Merchant): Promise<User | null> {
   return getUserById(merchant.user_id);
 }

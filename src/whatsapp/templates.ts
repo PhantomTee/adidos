@@ -19,6 +19,7 @@ export function helpMessage(): string {
 • balance — Check USDC balance
 • set alias <name> — Set your @alias
 • my profile — View your profile
+• set limit <amount> — Set your daily send limit
 
 *Merchant commands:*
 • register merchant <name> as @alias, category <type>

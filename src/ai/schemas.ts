@@ -19,6 +19,8 @@ export const IntentSchema = z.object({
     'SALES_SUMMARY',
     'TRANSACTION_HISTORY',
     'FIND_MERCHANTS',
+    'PENDING_INVOICES',
+    'SET_DAILY_LIMIT',
     'UNKNOWN',
   ]),
   confidence: z.number().min(0).max(1),

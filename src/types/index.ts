@@ -100,6 +100,8 @@ export type IntentType =
   | 'SALES_SUMMARY'
   | 'TRANSACTION_HISTORY'
   | 'FIND_MERCHANTS'
+  | 'PENDING_INVOICES'
+  | 'SET_DAILY_LIMIT'
   | 'UNKNOWN';
 
 export interface ParsedIntent {

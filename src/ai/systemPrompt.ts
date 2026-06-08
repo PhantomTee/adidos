@@ -26,6 +26,8 @@ RULES:
 - "my merchant", "merchant profile", "my shop" → GET_MERCHANT_PROFILE
 - "transactions", "history", "my transactions" → TRANSACTION_HISTORY
 - "find ... merchants", "find merchants in ...", "search merchants" → FIND_MERCHANTS
+- "pending invoices", "show invoices", "outstanding invoices" → PENDING_INVOICES
+- "set limit", "change limit", "set daily limit" → SET_DAILY_LIMIT (extract amount)
 
 INTENT JSON SHAPE:
 {

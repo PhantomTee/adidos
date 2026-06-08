@@ -3,10 +3,10 @@
  * All payment execution goes through here. No payment happens without explicit user confirmation.
  */
 import { parseIntent } from '../ai/intentParser';
-import { getOrCreateUser } from '../services/users';
+import { getOrCreateUser, updateUser } from '../services/users';
 import { setUserAlias, resolveAlias } from '../services/aliases';
 import { ensureWallet, checkUserBalance } from '../services/wallets';
-import { registerMerchant, getMerchantByAlias, getMerchantByUserId, getMerchantById, findMerchantsByCategory, getMerchantUser } from '../services/merchants';
+import { registerMerchant, getMerchantByAlias, getMerchantByUserId, getMerchantById, findMerchantsByCategory, findMerchantsByLocation, getMerchantUser } from '../services/merchants';
 import {
   createInvoice,
   getInvoiceById,
@@ -159,15 +159,22 @@ export async function routeMessage(
       }
 
       case 'TRANSACTION_HISTORY': {
-        if (!user.wallet_address) return reply(T.noWalletMessage());
         const txs = await getUserTransactions(user.id, 10);
         return reply(T.transactionHistoryMessage(txs));
       }
 
       case 'FIND_MERCHANTS': {
-        const query = intent.category ?? intent.location ?? '';
-        if (!query) return reply('What kind of merchants are you looking for? e.g. *find food merchants*');
-        const merchants = await findMerchantsByCategory(query);
+        const { category, location } = intent;
+        if (!category && !location) return reply('What kind of merchants are you looking for? e.g. *find food merchants* or *find merchants in Lagos*');
+        let merchants: Awaited<ReturnType<typeof findMerchantsByCategory>>;
+        let query: string;
+        if (location && !category) {
+          merchants = await findMerchantsByLocation(location);
+          query = location;
+        } else {
+          merchants = await findMerchantsByCategory(category!);
+          query = category!;
+        }
         return reply(T.merchantsFoundMessage(merchants, query));
       }
 
@@ -177,18 +184,24 @@ export async function routeMessage(
         return reply(T.merchantProfileMessage(merchant.business_name, merchant.merchant_alias, merchant.category, merchant.wallet_address, merchant.location));
       }
 
+      case 'PENDING_INVOICES': {
+        const merchant = await getMerchantByUserId(user.id);
+        if (!merchant) return reply('You are not registered as a merchant.');
+        const pendingInvs = await getMerchantInvoices(merchant.id, 'pending');
+        return reply(T.pendingInvoicesMessage(
+          pendingInvs.map(i => ({ amount_usdc: Number(i.amount_usdc), memo: i.memo, created_at: i.created_at, customer_alias: i.customer_alias }))
+        ));
+      }
+
+      case 'SET_DAILY_LIMIT': {
+        const { amount } = intent;
+        if (!amount) return reply('How much? e.g. *set limit 50*');
+        if (amount < 1 || amount > 500) return reply('Daily limit must be between 1 and 500 USDC.');
+        await updateUser(user.id, { daily_limit_usdc: amount });
+        return reply(`Daily limit set to *${amount.toFixed(2)} USDC*.`);
+      }
+
       default: {
-        // "pending invoices" is a natural-language phrase that maps to GET_MERCHANT_PROFILE area
-        // but may not parse cleanly — handle it here as a fallback keyword match
-        const lower = text.toLowerCase();
-        if (lower.includes('pending invoice') || lower === 'pending') {
-          const merchant = await getMerchantByUserId(user.id);
-          if (!merchant) return reply('You are not registered as a merchant.');
-          const pendingInvs = await getMerchantInvoices(merchant.id, 'pending');
-          return reply(T.pendingInvoicesMessage(
-            pendingInvs.map(i => ({ amount_usdc: Number(i.amount_usdc), memo: i.memo, created_at: i.created_at, customer_alias: i.customer_alias }))
-          ));
-        }
         return reply(T.unknownMessage());
       }
     }
