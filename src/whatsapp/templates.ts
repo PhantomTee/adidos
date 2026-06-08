@@ -6,7 +6,7 @@ export function welcomeMessage(alias?: string | null): string {
 
 I help informal businesses accept USDC payments through WhatsApp.
 
-Send *help* to see all commands.`;
+${helpMessage()}`;
 }
 
 export function helpMessage(): string {
