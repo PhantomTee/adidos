@@ -144,8 +144,12 @@ export function paymentConfirmationRequest(
   walletAddress: string,
   amountUsdc: number,
   memo?: string | null,
+  warnings?: string[],
 ): string {
-  return `*Confirm payment:*
+  const warningBlock = warnings && warnings.length > 0
+    ? warnings.map(w => `⚠️ ${w}`).join('\n') + '\n\n'
+    : '';
+  return `${warningBlock}*Confirm payment:*
 
 To: @${merchantAlias}
 Business: ${businessName}

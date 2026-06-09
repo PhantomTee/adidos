@@ -21,7 +21,7 @@ import {
   confirmPendingAction,
   cancelPendingAction,
 } from '../services/pendingActions';
-import { recordTransaction } from '../services/transactions';
+import { recordTransaction, hasTransactedWithMerchant, findRecentDuplicate } from '../services/transactions';
 import { checkDailyLimit } from '../services/limits';
 import { isCircleConfigured, sendCircleUsdc } from '../services/circle';
 import { isArcConfigured, sendArcUsdc } from '../services/arc';
@@ -265,6 +265,21 @@ async function handleInitiatePayment(
     return reply('Payments are not configured yet. I cannot process this payment.');
   }
 
+  // Gather safety warnings (run in parallel — non-blocking)
+  const [firstTime, duplicate] = await Promise.all([
+    hasTransactedWithMerchant(user.id, merchant.id),
+    findRecentDuplicate(user.id, merchant.id, amountUsdc, 5),
+  ]);
+
+  const warnings: string[] = [];
+  if (!firstTime) {
+    warnings.push(`*First time paying @${merchant.merchant_alias}* — you have no prior transactions with this merchant. Confirm the alias is correct.`);
+  }
+  if (duplicate) {
+    const mins = Math.round((Date.now() - new Date(duplicate.created_at).getTime()) / 60000);
+    warnings.push(`*Possible duplicate* — you already sent ${amountUsdc.toFixed(2)} USDC to @${merchant.merchant_alias} ${mins} minute${mins === 1 ? '' : 's'} ago.`);
+  }
+
   // Create pending action for final confirmation
   const payload: Record<string, unknown> = {
     merchantId: merchant.id,
@@ -285,6 +300,7 @@ async function handleInitiatePayment(
     merchant.wallet_address,
     amountUsdc,
     memo,
+    warnings,
   ));
 }
 

@@ -84,11 +84,9 @@ export async function checkCircleBalance(circleWalletId: string): Promise<Balanc
     const client = getCircleClient();
     const tokenId = process.env.CIRCLE_ARC_USDC_TOKEN_ID!;
 
-    // Circle SDK uses { id } not { walletId } for getWalletTokenBalance
+    const resp = await client.getWalletTokenBalance({ id: circleWalletId });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const resp = await (client as any).getWalletTokenBalance({ id: circleWalletId });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const balances: any[] = resp?.data?.tokenBalances ?? resp?.data ?? [];
+    const balances: any[] = (resp as any)?.data?.tokenBalances ?? [];
 
     const usdcBalance = Array.isArray(balances)
       ? balances.find((b) => b?.token?.id === tokenId || b?.tokenId === tokenId)
@@ -176,10 +174,9 @@ async function pollCircleTxHash(
   while (Date.now() - start < timeoutMs) {
     await sleep(interval);
     try {
+      const resp = await client.getTransaction({ id: txId });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const resp = await (client as any).getTransaction({ id: txId });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const tx: any = resp?.data;
+      const tx: any = (resp as any)?.data?.transaction;
       if (!tx) continue;
 
       const state: string = tx.state ?? '';
