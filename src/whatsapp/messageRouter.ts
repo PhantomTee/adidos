@@ -21,11 +21,10 @@ import {
   confirmPendingAction,
   cancelPendingAction,
 } from '../services/pendingActions';
-import { recordTransaction, hasTransactedWithMerchant, findRecentDuplicate } from '../services/transactions';
+import { recordTransaction, getUserTransactions, hasTransactedWithMerchant, findRecentDuplicate } from '../services/transactions';
 import { checkDailyLimit } from '../services/limits';
 import { isCircleConfigured, sendCircleUsdc } from '../services/circle';
 import { isArcConfigured, sendArcUsdc } from '../services/arc';
-import { getUserTransactions } from '../services/transactions';
 import * as T from './templates';
 import { normalizeAlias, normalizePhone, isValidUsdcAmount } from '../utils/validation';
 import { extractErrorMessage } from '../utils/errors';

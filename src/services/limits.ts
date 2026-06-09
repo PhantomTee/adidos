@@ -17,8 +17,8 @@ export async function checkDailyLimit(user: User, amountUsdc: number): Promise<v
     0,
   );
 
-  if (spentToday + amountUsdc > user.daily_limit_usdc) {
-    throw new DailyLimitExceededError(user.daily_limit_usdc);
+  if (spentToday + amountUsdc > Number(user.daily_limit_usdc)) {
+    throw new DailyLimitExceededError(Number(user.daily_limit_usdc));
   }
 }
 
